@@ -2,11 +2,6 @@
 
 # bridging-bpjs
 
-### Composer
-
-```cmd
-composer require virusphp/bridging-bpjs
-```
 
 ## Publish Config
 
