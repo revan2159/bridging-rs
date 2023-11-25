@@ -6,7 +6,7 @@
 ## Publish Config
 
 ```cmd
-php artisan vendor:publish --provider="Vclaim\Bridging\BridgingBpjsServiceProvider" --tag=config
+php artisan vendor:publish --provider="Bpjs\Bridging\BridgingBpjsServiceProvider" --tag=config
 ```
 
 ## Usage
