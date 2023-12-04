@@ -2,17 +2,17 @@
 
 namespace Bpjs\Bridging;
 
-class CurlFactory 
+class CurlFactory
 {
 	public function request($endpoint, $headers, $method = "", $payload = "")
 	{
 		$headers = $this->setHeader($headers);
 
 		$optf = [
- 			CURLOPT_VERBOSE => true,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_SSL_VERIFYHOST => false,
+			CURLOPT_VERBOSE => true,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_SSL_VERIFYPEER => false,
+			CURLOPT_SSL_VERIFYHOST => false,
 			CURLOPT_TIMEOUT => 5,
 			CURLOPT_CONNECTTIMEOUT => 5,
 			CURLOPT_RETURNTRANSFER => true,
@@ -21,17 +21,28 @@ class CurlFactory
 
 		if (!empty($method)) {
 			$optf[CURLOPT_CUSTOMREQUEST] = $method;
-            $optf[CURLOPT_POSTFIELDS] = $payload;
-            $optf[CURLOPT_HTTPHEADER][] = 'Content-Type: Application/x-www-form-urlencoded';
+			$optf[CURLOPT_POSTFIELDS] = $payload;
+			$optf[CURLOPT_HTTPHEADER][] = 'Content-Type: Application/x-www-form-urlencoded';
 		} else {
 			$optf[CURLOPT_HTTPHEADER][] = 'Content-Type: Application/json';
 		}
 
 		$ch = curl_init($endpoint);
-	 	curl_setopt_array($ch, $optf);
+		curl_setopt_array($ch, $optf);
 		$result = curl_exec($ch);
 		$info = curl_getinfo($ch);
 		// dd($info);
+		if ($info['http_code'] == 404) {
+			// Return the custom JSON response
+			$result = json_encode([
+				'metaData' => [
+					'code' => 404,
+					'message' => 'Service not found or invalid request',
+					'enpoint' => $endpoint
+				],
+				'response' => null
+			]);
+		}
 		curl_close($ch);
 
 		return $result;
@@ -42,10 +53,10 @@ class CurlFactory
 		$headers = $this->setHeader($headers);
 
 		$optf = [
- 			CURLOPT_VERBOSE => true,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_SSL_VERIFYPEER => false,
-            CURLOPT_SSL_VERIFYHOST => false,
+			CURLOPT_VERBOSE => true,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_SSL_VERIFYPEER => false,
+			CURLOPT_SSL_VERIFYHOST => false,
 			CURLOPT_TIMEOUT => 5,
 			CURLOPT_CONNECTTIMEOUT => 5,
 			CURLOPT_RETURNTRANSFER => true,
@@ -54,17 +65,28 @@ class CurlFactory
 
 		if (!empty($method)) {
 			$optf[CURLOPT_CUSTOMREQUEST] = $method;
-            $optf[CURLOPT_POSTFIELDS] = $payload;
-            $optf[CURLOPT_HTTPHEADER][] = 'Content-Type: Application/json';
+			$optf[CURLOPT_POSTFIELDS] = $payload;
+			$optf[CURLOPT_HTTPHEADER][] = 'Content-Type: Application/json';
 		} else {
 			$optf[CURLOPT_HTTPHEADER][] = 'Content-Type: Application/json';
 		}
 
 		$ch = curl_init($endpoint);
-	 	curl_setopt_array($ch, $optf);
+		curl_setopt_array($ch, $optf);
 		$result = curl_exec($ch);
 		$info = curl_getinfo($ch);
 		// dd($info);
+		if ($info['http_code'] == 404) {
+			// Return the custom JSON response
+			$result = json_encode([
+				'metaData' => [
+					'code' => 404,
+					'message' => 'Service not found or invalid request',
+					'enpoint' => $endpoint
+				],
+				'response' => null
+			]);
+		}
 		curl_close($ch);
 
 		return $result;
@@ -74,10 +96,10 @@ class CurlFactory
 	{
 		$header = [];
 		$header[] = 'Accept: application/json';
-		$header[] = 'X-cons-id:'. $headers['X-cons-id'];
-		$header[] = 'X-timestamp:'. $headers['X-timestamp'];
-		$header[] = 'X-signature:'. $headers['X-signature'];
-		$header[] = 'user_key:'. $headers['user_key'];
+		$header[] = 'X-cons-id:' . $headers['X-cons-id'];
+		$header[] = 'X-timestamp:' . $headers['X-timestamp'];
+		$header[] = 'X-signature:' . $headers['X-signature'];
+		$header[] = 'user_key:' . $headers['user_key'];
 		return $header;
 	}
 }

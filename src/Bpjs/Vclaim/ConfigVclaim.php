@@ -18,7 +18,7 @@ class ConfigVclaim extends ManageService
     public function __construct()
     {
         $dotenv = Dotenv::createUnsafeImmutable(getcwd());
-		$dotenv->safeLoad();
+        $dotenv->safeLoad();
 
         $this->urlEndpoint = getenv('API_BPJS_VCLAIM');
         $this->consId = getenv('CONS_ID');
@@ -28,22 +28,22 @@ class ConfigVclaim extends ManageService
 
     public function setUrl()
     {
-       return $this->urlEndpoint; 
+        return $this->urlEndpoint;
     }
 
     public function setConsId()
     {
-       return $this->consId; 
+        return $this->consId;
     }
 
     public function setSecretKey()
     {
-       return $this->secretKey; 
+        return $this->secretKey;
     }
 
     public function setUserKey()
     {
-       return $this->userKey; 
+        return $this->userKey;
     }
 
     public function setTimestamp()
@@ -57,29 +57,29 @@ class ConfigVclaim extends ManageService
     }
 
     public function setUrlEncode()
-	{
-		return array('Content-Type' => 'Application/x-www-form-urlencoded');
-	}
+    {
+        return array('Content-Type' => 'Application/x-www-form-urlencoded');
+    }
 
-	public function setUrlJson()
-	{
-		return array('Content-Type' => 'Application/Json');
-	}
+    public function setUrlJson()
+    {
+        return array('Content-Type' => 'Application/Json');
+    }
 
     public function setHeader()
-	{
-		return [
-            'Accept' => 'application/json',
-			'X-cons-id'   => $this->setConsid(),
-			'X-timestamp' => $this->setTimestamp(),
-			'X-signature' => $this->setSignature(),
-			'user_key'    => $this->setUserKey()
-		];
-	}
-
-    public function keyDecrypt($timestamp) 
     {
-        return $this->setConsid().$this->setSecretKey().$timestamp;
+        return [
+            'Accept' => 'application/json',
+            'X-cons-id'   => $this->setConsid(),
+            'X-timestamp' => $this->setTimestamp(),
+            'X-signature' => $this->setSignature(),
+            'user_key'    => $this->setUserKey()
+        ];
+    }
+
+    public function keyDecrypt($timestamp)
+    {
+        return $this->setConsid() . $this->setSecretKey() . $timestamp;
     }
 
     public function setHeaders($header)

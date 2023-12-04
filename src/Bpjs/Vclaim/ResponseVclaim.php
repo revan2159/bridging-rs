@@ -22,8 +22,8 @@ class ResponseVclaim
             "metaData" => $metaData,
             "response" => json_decode($this->decompressed(GenerateBpjs::stringDecrypt($key, $response)))
         ];
-        // return json_encode($data);
-        return $data;
+        return json_encode($data);
+        // return $data;
     }
 
     protected function decompressed($dataString)
