@@ -1,5 +1,13 @@
 # bridging-bpjs
 
+# SATUSEHAT
+
+SATUSEHAT adalah ekosistem pertukaran data kesehatan (HIE: Health Information Exchange) yang menghubungkan sistem informasi atau aplikasi dari seluruh anggota ekosistem digital kesehatan Indonesia termasuk fasyankes, regulator, penjamin, dan penyedia layanan digital. SATUSEHAT sebagai ekosistem telah sesuai dengan Cetak Biru Transformasi Digital Kesehatan 2024 yang dapat diakses di situs dto.kemkes.go.id.
+
+# BRIDGING SATUSEHAT
+
+bridging-satusehat adalah sebuah package yang di desain untuk mempermudah pengguna framework php ataupun native untuk melakukan generate token untuk akses ke service SATUSEHAT baik , semoga package ini dapat membantu teman-teman dalam melakukan develop terhadap perkembangan service SATUSEHAT
+
 ## Publish Config
 
 ```cmd
