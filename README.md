@@ -1,8 +1,5 @@
 # bridging-bpjs
 
-# bridging-bpjs
-
-
 ## Publish Config
 
 ```cmd
@@ -35,19 +32,41 @@ API_KEMKES=http://sirs.kemkes.go.id/fo/index.php/
 
 ```
 
+```env
+#Confirasi .env SATUSEHAT
+
+# CONFIG SATUSEHAT PRODUCTION
+API_SATUSEHAT_AUTH=https://api-satusehat-dev.dto.kemkes.go.id/oauth2/v1
+API_SATUSEHAT_BASE=https://api-satusehat-dev.dto.kemkes.go.id/fhir-r4/v1
+API_SATUSEHAT_CONSENT=https://api-satusehat-dev.dto.kemkes.go.id/consent/v
+
+CLIENT_ID_SATUSEHAT="isi dengan client_id masing2"
+CLIENT_SECRET_SATUSEHAT="isi dengan client_secret masing"
+
+```
+
 ```php
 <?php
-// configurasi config (Support laravel 7 ke atas)
-config/vclaim.php
-return [
-	'api' => [
-		'endpoint'  => env('API_BPJS','ENDPOINT-KAMU'),
-		'consid'  => env('CONS_ID','CONSID-KAMU'),
-		'seckey' => env('SECRET_KEY', 'SECRET-KAMU'),
-		'user_key' => env('USER_KEY', 'SECRET-KAMU'),
-	]
-]
+// Example Controller bridging to SATUSEHAT  (Laravel 7 ke atas)
+use Virusphp\BridgingSatusehat\Bridge\BridgeBase;
 
+Class SomeController
+{
+	protected $bridging;
+
+	public function __construct()
+	{
+		$this->bridging = new BridgeBase();
+	}
+
+	// Example To use get Patient
+	// Name of Method example
+	public function getPatient($nik)
+	{
+		$endpoint = 'Practitioner?identifier=https://fhir.kemkes.go.id/id/nik|'. $nik;
+		return $this->bridging->getRequest($endpoint);
+	}
+}
 ```
 
 ```php
