@@ -1,6 +1,6 @@
 {
-    "name": "rskbdev/bridging-bpjs",
-    "description": "Bridging BPJS Yang Bikin PUSING",
+    "name": "rskbdev/bridging-rs",
+    "description": "Bridging RS",
     "type": "library",
     "minimum-stability": "dev",
     "require": {
@@ -12,21 +12,20 @@
     "autoload": {
         "psr-4": {
             "Bpjs\\Bridging\\": "src/Bpjs/",
-            "Kemkes\\Bridging\\": "src/kemkes"
+            "Kemkes\\Bridging\\": "src/Kemkes",
+            "Satusehat\\Bridging\\": "src/Satusehat"
         }
     },
-
     "config": {
         "sort-packages": true
-      },
+    },
     "extra": {
         "laravel": {
-          "providers": [
-            "Bpjs\\Bridging\\BridgingBpjsServiceProvider"
-          ]
+            "providers": [
+                "Bpjs\\Bridging\\BridgingBpjsServiceProvider"
+            ]
         }
     },
-
     "authors": [
         {
             "name": "rskbdev",

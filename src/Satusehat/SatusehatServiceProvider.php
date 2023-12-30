@@ -1,10 +1,10 @@
 <?php
 
-namespace Bpjs\Bridging;
+namespace Satusehat\Bridging;
 
 use Illuminate\Support\ServiceProvider;
 
-class BridgingBpjsServiceProvider extends ServiceProvider
+class SatusehatServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
@@ -13,7 +13,6 @@ class BridgingBpjsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
     }
 
     /**
@@ -26,10 +25,6 @@ class BridgingBpjsServiceProvider extends ServiceProvider
         include __DIR__ . '../../routes.php';
 
         $this->publishes([
-            __DIR__ . '../../../config/vclaim.php' => config_path('vclaim.php'),
-            //    __DIR__.'../../../config/icare.php' => config_path('icare.php'),
-            __DIR__ . '../../../config/antrol.php' => config_path('antrol.php'),
-            __DIR__ . '../../../config/kemkes.php' => config_path('kemkes.php'),
             __DIR__ . '../../../config/satusehat.php' => config_path('satusehat.php'),
         ], 'config');
     }
