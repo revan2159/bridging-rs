@@ -1,7 +1,5 @@
 # bridging-bpjs
 
-# bridging-bpjs
-
 
 ## Publish Config
 
